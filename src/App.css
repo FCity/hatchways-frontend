@@ -1,38 +1,151 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+/* Generics */
+
+* {
+  /* border: 1px solid gray; */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container, input {
+  font-family: Raleway, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Inputs */
+
+.search {
+  position: sticky;
+  top: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+input {
+  display: block;
+  border: 0;
+  border-bottom: 2px solid #ddd;
+  color: #111;
+}
+
+input:focus {
+  outline: none;
+  border-color: #666;
+}
+
+.search-bar {
+  width: 98vw;
+  font-size: 1rem;
+  margin: auto;
+  padding: 1em 0 .5em .5em;
+}
+
+.tag-input {
+  padding-bottom: .5em;
+}
+
+/* Student Components */
+
+.student {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  border-bottom: 1px solid #eee;
+  padding: 1em;
+}
+
+.student-img-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: flex-start;
 }
 
-.App-link {
-  color: #61dafb;
+.student-pic {
+  border: 1px solid #ccc;
+  border-radius: 100%;
+  width: 7em;
+  margin-top: 1em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.student-info {
+  padding-left: 2em;
+}
+
+.student-name {
+  text-transform: uppercase;
+  font-weight: 900;
+}
+
+.student-details, .student-grades {
+  padding: 1em;
+  color: #111;
+}
+
+.student-details p {
+  padding: .2em;
+}
+
+.student-details p, .student-grades ul li, .tag, .tag-input {
+  font-size: .8rem;
+}
+
+.student-grades ul {
+  list-style-type: none;
+}
+
+.tag-section, .tag-form {
+  padding: .5em 1em;
+}
+
+.tag-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #ddd;
+  border-radius: .25em;
+  margin-right: .25em;
+  margin-bottom: .25em;
+  padding: .5em .75em;
+}
+
+/* Buttons */
+
+.btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.btn-toggle {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.fa {
+  font-size: 2rem;
+  color: #aaa;
+}
+
+.fa:hover {
+  color: #111;
+}
+
+@media only screen and (max-width: 300px) {
+  .student-name {
+    font-size: 1.25rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .student-details, .student-grades {
+    padding: .5em;
+  }
+
+  .tag-section, .tag-form {
+    padding: .5em;
+  }
+
+  .fa {
+    font-size: 1.5rem;
   }
 }
