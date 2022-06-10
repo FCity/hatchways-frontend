@@ -65,22 +65,24 @@ function App() {
 
   return (
     <div className='container'>
-      <div className='search'>
-        <input
-          type='text'
-          className='search-bar'
-          placeholder='Search by name'
-          value={nameQuery}
-          onChange={handleNameSearch} />
-      </div>
+      <div className='search-fields'>
+        <div className='search-field'>
+          <input
+            type='text'
+            className='search-bar'
+            placeholder='Search by name'
+            value={nameQuery}
+            onChange={handleNameSearch} />
+        </div>
 
-      <div className='search'>
-        <input
-          type='text'
-          className='search-bar'
-          placeholder='Search by tag'
-          value={tagQuery}
-          onChange={handleTagSearch} />
+        <div className='search-field'>
+          <input
+            type='text'
+            className='search-bar'
+            placeholder='Search by tag'
+            value={tagQuery}
+            onChange={handleTagSearch} />
+        </div>
       </div>
 
       {nameQuery === '' && tagQuery === '' ?

@@ -16,9 +16,13 @@
 
 /* Inputs */
 
-.search {
+.search-fields {
   position: sticky;
   top: 0;
+}
+
+.search-field {
+  padding: 0 .5em;
 }
 
 input {
@@ -34,9 +38,8 @@ input:focus {
 }
 
 .search-bar {
-  width: 98vw;
+  width: 100%;
   font-size: 1rem;
-  margin: auto;
   padding: 1em 0 .5em .5em;
 }
 
