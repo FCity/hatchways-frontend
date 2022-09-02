@@ -1,6 +1,7 @@
-import React, { useState, useReducer } from 'react'
+import { useState, useReducer } from 'react'
+import './Student.css'
 
-export default function Student({student, sendTag}) {
+export default function Student({student, average, sendTag}) {
   const [tag, setTag] = useState('')
   const [show, toggle] = useReducer(state => !state, false)
 
@@ -28,10 +29,7 @@ export default function Student({student, sendTag}) {
           <p className='student-company'>Company: {student.company}</p>
           <p className='student-skill'>Skill: {student.skill}</p>
           <p className='student-average'>
-            Average: 
-            {student.grades.reduce((prev, curr) => {
-              return Number(prev) + Number(curr)
-            }) / student.grades.length}%
+            Average: {average}%
           </p>
         </div>
 

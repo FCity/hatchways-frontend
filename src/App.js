@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import axios from 'axios'
 import Student from './components/Student'
 import './App.css'
 
-function App() {
+export default function App() {
   const [students, setStudents] = useState([])
   const [nameQuery, setNameQuery] = useState('')
   const [tagQuery, setTagQuery] = useState('')
@@ -24,34 +24,36 @@ function App() {
   useEffect(() => {
     let results = []
     
-    /*
-    SEARCH
-      if only name search is filled
-      else if only tag search is filled
-      else if both name and tag search are filled
-    */
     if (nameQuery !== '' && tagQuery === '') {
       results = students
-                      .filter(student => (student.firstName + ' ' + student.lastName).toLowerCase().includes(nameQuery))
+                      .filter(student => (student.firstName + ' ' + student.lastName).toLowerCase().includes(nameQuery.toLowerCase()))
     } else if (nameQuery === '' && tagQuery !== '') {
       results = students
-                      .filter(student => student.tags.some(tag => tag.includes(tagQuery)))
+                      .filter(student => student.tags.some(tag => tag.toLowerCase().includes(tagQuery.toLowerCase())))
     } else if (nameQuery !== '' && tagQuery !== '') {
       results = students
-                      .filter(student => (student.firstName + ' ' + student.lastName).toLowerCase().includes(nameQuery)
-                                          && student.tags.some(tag => tag.includes(tagQuery)))
+                      .filter(student => (student.firstName + ' ' + student.lastName).toLowerCase().includes(nameQuery.toLowerCase())
+                                          && student.tags.some(tag => tag.toLowerCase().includes(tagQuery.toLowerCase())))
     }
 
-    // set results
     setSearchResults(results)
   }, [nameQuery, tagQuery, students])
+
+  const averages = useMemo(() => {
+    console.log('average calculated')
+    return students.map(student => {
+      return student.grades.reduce((prev, curr) => {
+        return Number(prev) + Number(curr)
+      }) / student.grades.length
+    })
+  }, [students])
 
   // add tag to student
   const sendTag = (studentId, tagName) => {
     setStudents(students => {
       return students.map(student => {
         if (student.id === studentId) {
-          student.tags.push(tagName)
+          student = Object.assign({}, {...student}, {tags: [...student.tags, tagName]})
         }
 
         return student
@@ -86,12 +88,10 @@ function App() {
       </div>
 
       {nameQuery === '' && tagQuery === '' ?
-        students.map((student, i) => <Student key={i} student={student} sendTag={sendTag} />)
+        students.map(student => <Student key={student.id} student={student} average={averages[student.id-1]} sendTag={sendTag} />)
         :
-        searchResults.map((student, i) => <Student key={i} student={student} sendTag={sendTag} />)
+        searchResults.map(student => <Student key={student.id} student={student} average={averages[student.id-1]} sendTag={sendTag} />)
       }
     </div>
   )
 }
-
-export default App
